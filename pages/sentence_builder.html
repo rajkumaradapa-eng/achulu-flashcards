@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telugu Sentence Builder - Telugu Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                    <h1 class="text-xl font-bold text-gray-800">Telugu Kiranam</h1>
+                </div>
+                <a href="../index.html" class="flex items-center space-x-2 text-blue-600 hover:text-blue-800 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
+                    </svg>
+                    <span class="font-medium">Home</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="pt-20 pb-16 flex flex-col items-center justify-center min-h-screen">
+        <div id="root" class="w-full max-w-2xl p-4"></div>
+    </div>
+    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="text-center text-sm text-gray-600">
+                © 2024 Telugu Kiranam. Learn Telugu with love.
+            </div>
+        </div>
+    </footer>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const Volume2 = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" /></svg>);
+        const RefreshCcw = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>);
+        const Check = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>);
+        const ArrowRight = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>);
+        const Star = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>);
+        const Home = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>);
+
+        const sentenceLevels = [
+            {
+                levelName: "Level 1: Greetings (పలకరింపులు)",
+                sentences: [
+                    { id: 1, english: "Hello / Salutations", teluguFull: "నమస్కారం", words: [{ id: 'w1', text: "నమస్కారం", translit: "Namaskāram", mean: "Hello" }], icon: "🙏" },
+                    { id: 2, english: "Good Morning", teluguFull: "శుభోదయం", words: [{ id: 'w1', text: "శుభోదయం", translit: "Śubhōdayam", mean: "Good Morning" }], icon: "🌅" },
+                    { id: 3, english: "How are you?", teluguFull: "మీరు ఎలా ఉన్నారు?", words: [{ id: 'w1', text: "మీరు", translit: "Mīru", mean: "You" }, { id: 'w2', text: "ఎలా", translit: "Elā", mean: "How" }, { id: 'w3', text: "ఉన్నారు?", audioText: "ఉన్నారు", translit: "Unnāru?", mean: "Are?" }], icon: "❓" }
+                ]
+            },
+            {
+                levelName: "Level 2: Introduction (పరిచయం)",
+                sentences: [
+                    { id: 4, english: "My name is Ravi.", teluguFull: "నా పేరు రవి", words: [{ id: 'w1', text: "నా", translit: "Nā", mean: "My" }, { id: 'w2', text: "పేరు", translit: "Pēru", mean: "Name" }, { id: 'w3', text: "రవి", translit: "Ravi", mean: "Ravi" }], icon: "📛" },
+                    { id: 5, english: "I am a student.", teluguFull: "నేను విద్యార్థిని", words: [{ id: 'w1', text: "నేను", translit: "Nēnu", mean: "I" }, { id: 'w2', text: "విద్యార్థిని", translit: "Vidyārthini", mean: "Student" }], icon: "🎒" }
+                ]
+            },
+            {
+                levelName: "Level 3: Family (కుటుంబం)",
+                sentences: [
+                    { id: 6, english: "She is my mother.", teluguFull: "ఆమె నా అమ్మ", words: [{ id: 'w1', text: "ఆమె", translit: "Āme", mean: "She" }, { id: 'w2', text: "నా", translit: "Nā", mean: "My" }, { id: 'w3', text: "అమ్మ", translit: "Amma", mean: "Mother" }], icon: "👩" },
+                    { id: 7, english: "He is my father.", teluguFull: "అతను నా నాన్న", words: [{ id: 'w1', text: "అతను", translit: "Atanu", mean: "He" }, { id: 'w2', text: "నా", translit: "Nā", mean: "My" }, { id: 'w3', text: "నాన్న", translit: "Nānna", mean: "Father" }], icon: "👨" }
+                ]
+            }
+        ];
+
+        function TeluguSentenceBuilder() {
+            const [currentLevelIdx, setCurrentLevelIdx] = useState(0);
+            const [currentSentenceIdx, setCurrentSentenceIdx] = useState(0);
+            const [builtSentence, setBuiltSentence] = useState([]);
+            const [availableWords, setAvailableWords] = useState([]);
+            const [feedback, setFeedback] = useState("neutral");
+
+            const currentLevel = sentenceLevels[currentLevelIdx];
+            const target = currentLevel.sentences[currentSentenceIdx];
+
+            useEffect(() => {
+                resetSentence();
+            }, [currentSentenceIdx, currentLevelIdx]);
+
+            const resetSentence = () => {
+                setBuiltSentence([]);
+                setFeedback("neutral");
+                const shuffled = [...sentenceLevels[currentLevelIdx].sentences[currentSentenceIdx].words].sort(() => Math.random() - 0.5);
+                setAvailableWords(shuffled);
+            };
+
+            const handleWordClick = (word) => {
+                if (feedback === "correct") return;
+                playAudio(word.audioText || word.text);
+                setBuiltSentence([...builtSentence, word]);
+                setAvailableWords(availableWords.filter(w => w.id !== word.id));
+            };
+
+            const handleRemoveWord = (word) => {
+                if (feedback === "correct") return;
+                setAvailableWords([...availableWords, word]);
+                setBuiltSentence(builtSentence.filter(w => w.id !== word.id));
+                setFeedback("neutral");
+            };
+
+            const checkSentence = () => {
+                const currentString = builtSentence.map(w => w.text).join(' ');
+                if (currentString.trim() === target.teluguFull.trim()) {
+                    setFeedback("correct");
+                    playAudio(target.teluguFull);
+                } else {
+                    setFeedback("wrong");
+                    playAudio("తప్పు. Try again.");
+                }
+            };
+
+            const nextSentence = () => {
+                if (currentSentenceIdx < currentLevel.sentences.length - 1) {
+                    setCurrentSentenceIdx(prev => prev + 1);
+                } else if (currentLevelIdx < sentenceLevels.length - 1) {
+                    setCurrentLevelIdx(prev => prev + 1);
+                    setCurrentSentenceIdx(0);
+                } else {
+                    setCurrentLevelIdx(0);
+                    setCurrentSentenceIdx(0);
+                }
+            };
+
+            const playAudio = (text) => {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'te-IN';
+                    utterance.rate = 0.6;
+                    window.speechSynthesis.speak(utterance);
+                }
+            };
+
+            return (
+                <div className="max-w-2xl w-full bg-white rounded-3xl shadow-xl overflow-hidden border-4 border-white relative">
+                    <div className="bg-blue-600 p-4 flex justify-between items-center text-white">
+                        <div className="flex items-center gap-3">
+                            <div>
+                                <h2 className="text-sm font-medium opacity-90 uppercase tracking-wider">{currentLevel.levelName}</h2>
+                                <div className="flex gap-1 mt-1">
+                                    {currentLevel.sentences.map((_, idx) => (
+                                        <div key={idx} className={`h-1.5 w-6 rounded-full transition-colors duration-300 ${idx === currentSentenceIdx ? 'bg-white' : 'bg-blue-400'}`} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-blue-700/50 p-2 rounded-lg">
+                            <span className="text-xl font-bold">{currentSentenceIdx + 1}/{currentLevel.sentences.length}</span>
+                        </div>
+                    </div>
+                    <div className="p-6 md:p-8">
+                        <div className="flex flex-col items-center mb-8">
+                            <div className="text-6xl mb-4 filter drop-shadow-md animate-bounce-slow">{target.icon}</div>
+                            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 text-center">{target.english}</h1>
+                        </div>
+                        <div className={`min-h-[100px] border-b-4 border-dashed rounded-xl mb-8 p-4 flex flex-wrap gap-3 items-center justify-center transition-colors duration-300 ${feedback === 'correct' ? 'bg-green-50 border-green-200' : feedback === 'wrong' ? 'bg-red-50 border-red-200' : 'bg-gray-50 border-gray-200'}`}>
+                            {builtSentence.length === 0 && <span className="text-gray-400 text-sm select-none">Tap words to build sentence</span>}
+                            {builtSentence.map((word, idx) => (
+                                <button key={word.id} onClick={() => handleRemoveWord(word)}
+                                    className="bg-white border-2 border-blue-200 text-blue-800 px-4 py-2 rounded-lg shadow-sm font-bold text-xl hover:bg-red-50 hover:border-red-200 transition-all animate-pop-in flex flex-col items-center">
+                                    <span>{word.text}</span>
+                                    <span className="text-xs font-normal text-blue-500">{word.translit}</span>
+                                </button>
+                            ))}
+                        </div>
+                        <div className="h-8 mb-4 text-center">
+                            {feedback === 'correct' && (
+                                <div className="flex items-center justify-center gap-2 text-green-600 font-bold animate-fade-in">
+                                    <Star className="w-5 h-5 fill-current" />
+                                    <span>Correct! Adbhutam!</span>
+                                </div>
+                            )}
+                            {feedback === 'wrong' && <span className="text-red-500 font-bold animate-shake">Incorrect order. Try again!</span>}
+                        </div>
+                        <div className="flex flex-wrap justify-center gap-3 mb-8">
+                            {availableWords.map((word) => (
+                                <button key={word.id} onClick={() => handleWordClick(word)}
+                                    className="bg-blue-100 hover:bg-blue-200 text-blue-900 border border-blue-300 px-4 py-3 rounded-xl shadow-md font-medium text-lg md:text-xl transition-transform active:scale-95 flex flex-col items-center min-w-[80px]">
+                                    <span className="font-bold">{word.text}</span>
+                                    <span className="text-xs text-blue-800 font-semibold mb-0.5">{word.translit}</span>
+                                    <span className="text-xs opacity-60 font-normal">{word.mean}</span>
+                                </button>
+                            ))}
+                        </div>
+                        <div className="flex gap-4 justify-center">
+                            {feedback !== 'correct' ? (
+                                <>
+                                    <button onClick={resetSentence} className="p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors" title="Reset">
+                                        <RefreshCcw className="w-6 h-6" />
+                                    </button>
+                                    <button onClick={checkSentence} disabled={builtSentence.length === 0} className={`flex items-center gap-2 px-8 py-3 rounded-full font-bold text-white shadow-lg transition-all ${builtSentence.length > 0 ? 'bg-blue-600 hover:bg-blue-700 hover:scale-105' : 'bg-gray-300 cursor-not-allowed'}`}>
+                                        <Check className="w-5 h-5" />
+                                        Check
+                                    </button>
+                                </>
+                            ) : (
+                                <button onClick={nextSentence} className="flex items-center gap-2 px-8 py-3 rounded-full font-bold text-white bg-green-500 hover:bg-green-600 shadow-lg hover:scale-105 transition-all animate-bounce-subtle">
+                                    Next Sentence
+                                    <ArrowRight className="w-5 h-5" />
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<TeluguSentenceBuilder />);
+    </script>
+</body>
+</html>

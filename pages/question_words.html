@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telugu Question Words - Telugu Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                    <h1 class="text-xl font-bold text-gray-800">Telugu Kiranam</h1>
+                </div>
+                <a href="../index.html" class="flex items-center space-x-2 text-blue-600 hover:text-blue-800 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
+                    </svg>
+                    <span class="font-medium">Home</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="pt-20 pb-16 flex flex-col items-center justify-center min-h-screen">
+        <div id="root" class="w-full max-w-2xl p-4"></div>
+    </div>
+    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="text-center text-sm text-gray-600">
+                © 2024 Telugu Kiranam. Learn Telugu with love.
+            </div>
+        </div>
+    </footer>
+    <script type="text/babel">
+        const { useState } = React;
+        const Volume2 = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" /></svg>);
+        const HelpCircle = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9,9a3,3 0 1,1 6,0c0,2 -3,3 -3,3"/><path d="m9,17h.01"/></svg>);
+        const MessageCircle = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>);
+        const BookOpen = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>);
+        const Home = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>);
+
+        const questionWords = [
+            { id: 'q1', telugu: 'ఏమిటి?', translit: 'Ēmiṭi?', english: 'What?', icon: '🤔', usage: 'వస్తువుల గురించి అడగడానికి (To ask about things)' },
+            { id: 'q2', telugu: 'ఎక్కడ?', translit: 'Ekkaḍa?', english: 'Where?', icon: '📍', usage: 'స్థలం గురించి అడగడానికి (To ask about place)' },
+            { id: 'q3', telugu: 'ఎప్పుడు?', translit: 'Eppuḍu?', english: 'When?', icon: '⏰', usage: 'సమయం గురించి అడగడానికి (To ask about time)' },
+            { id: 'q4', telugu: 'ఎలా?', translit: 'Elā?', english: 'How?', icon: '🤷', usage: 'విధానం లేదా క్షేమం గురించి (Manner or Well-being)' },
+            { id: 'q5', telugu: 'ఎందుకు?', translit: 'Enduku?', english: 'Why?', icon: '❓', usage: 'కారణం అడగడానికి (To ask reason)' }
+        ];
+
+        const qaExamples = {
+            'q1': [{ q: "ఇది ఏమిటి?", qt: "Idi ēmiṭi?", qm: "What is this?", a: "ఇది ఒక పుస్తకం.", at: "Idi oka pustakam.", am: "This is a book.", icon: "📚" }],
+            'q2': [{ q: "రవి ఎక్కడ ఉన్నాడు?", qt: "Ravi ekkaḍa unnāḍu?", qm: "Where is Ravi?", a: "రవి తన ఇంట్లో ఉన్నాడు.", at: "Ravi tana inṭlō unnāḍu.", am: "Ravi is in his house.", icon: "🏠" }],
+            'q3': [{ q: "మీరు ఎప్పుడు వస్తారు?", qt: "Mīru eppuḍu vastāru?", qm: "When will you come?", a: "నేను రేపు ఉదయం వస్తాను.", at: "Nēnu rēpu udayaṃ vastānu.", am: "I will come tomorrow morning.", icon: "🗓" }],
+            'q4': [{ q: "మీరు ఎలా ఉన్నారు?", qt: "Mīru elā unnāru?", qm: "How are you?", a: "నేను చాలా బాగున్నాను.", at: "Nēnu cālā bāgunnānu.", am: "I am very fine.", icon: "😊" }],
+            'q5': [{ q: "పాప ఎందుకు ఏడుస్తోంది?", qt: "Pāpa enduku ēḍustōndi?", qm: "Why is the child crying?", a: "పాపకు ఆకలిగా ఉంది.", at: "Pāpaku ākaligā undi.", am: "Child is hungry.", icon: "🍼" }]
+        };
+
+        function TeluguQuestionModule() {
+            const [activeTab, setActiveTab] = useState('learn');
+            const [selectedQAWordId, setSelectedQAWordId] = useState('q1');
+
+            const playAudio = (text) => {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'te-IN';
+                    utterance.rate = 0.6;
+                    window.speechSynthesis.speak(utterance);
+                }
+            };
+
+            const currentExample = qaExamples[selectedQAWordId]?.[0];
+
+            return (
+                <div className="max-w-2xl w-full bg-white rounded-3xl shadow-xl overflow-hidden border-4 border-white flex flex-col h-auto min-h-[90vh]">
+                    <div className="bg-indigo-600 p-2 flex justify-around items-center text-white shadow-md z-10 shrink-0 sticky top-0">
+                        <button onClick={() => setActiveTab('learn')}
+                            className={`flex flex-col items-center p-2 rounded-xl transition-all flex-1 ${activeTab === 'learn' ? 'bg-white/20 font-bold' : 'hover:bg-white/10 opacity-80'}`}>
+                            <BookOpen className="w-6 h-6 mb-1" />
+                            <span className="text-xs md:text-sm">Parichayam</span>
+                        </button>
+                        <button onClick={() => setActiveTab('examples')}
+                            className={`flex flex-col items-center p-2 rounded-xl transition-all flex-1 ${activeTab === 'examples' ? 'bg-white/20 font-bold' : 'hover:bg-white/10 opacity-80'}`}>
+                            <MessageCircle className="w-6 h-6 mb-1" />
+                            <span className="text-xs md:text-sm">Q & A</span>
+                        </button>
+                    </div>
+                    <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-indigo-50/50">
+                        {activeTab === 'learn' && (
+                            <div className="grid grid-cols-1 gap-4 animate-fade-in pb-10">
+                                <h2 className="text-xl font-bold text-indigo-900 mb-2 text-center">ప్రశ్నార్థక పదాలు (Question Words)</h2>
+                                {questionWords.map((item) => (
+                                    <div key={item.id} className="bg-white rounded-2xl p-4 shadow-sm border border-indigo-100 flex items-center gap-4 hover:shadow-md transition-all cursor-pointer group" onClick={() => playAudio(item.telugu)}>
+                                        <div className="bg-indigo-100 p-3 rounded-full text-3xl group-hover:scale-110 transition-transform">{item.icon}</div>
+                                        <div className="flex-1">
+                                            <div className="flex items-baseline gap-2">
+                                                <h3 className="text-2xl font-bold text-indigo-700">{item.telugu}</h3>
+                                                <span className="text-sm font-semibold text-gray-500 italic">{item.translit}</span>
+                                            </div>
+                                            <p className="text-gray-800 font-medium">{item.english}</p>
+                                            <p className="text-xs text-gray-500 mt-1">{item.usage}</p>
+                                        </div>
+                                        <button className="p-2 bg-indigo-50 rounded-full text-indigo-400 group-hover:text-indigo-600 group-hover:bg-indigo-100">
+                                            <Volume2 className="w-5 h-5" />
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        {activeTab === 'examples' && (
+                            <div className="flex flex-col gap-4 animate-fade-in pb-4">
+                                <div className="flex gap-2 overflow-x-auto pb-2 mb-2 scrollbar-hide shrink-0">
+                                    {questionWords.map((w) => (
+                                        <button key={w.id} onClick={() => setSelectedQAWordId(w.id)}
+                                            className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-bold border-2 transition-all ${selectedQAWordId === w.id ? 'bg-indigo-600 text-white border-indigo-600 shadow-md' : 'bg-white text-gray-600 border-gray-200 hover:border-indigo-300'}`}>
+                                            {w.telugu}
+                                        </button>
+                                    ))}
+                                </div>
+                                {currentExample && (
+                                    <>
+                                        <div className="bg-white rounded-2xl p-5 shadow-md border-l-8 border-orange-400 relative cursor-pointer hover:bg-orange-50 transition-colors" onClick={() => playAudio(currentExample.q)}>
+                                            <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase mb-2 inline-block tracking-wider">Question</span>
+                                            <h3 className="text-xl md:text-2xl font-bold text-gray-800 mt-1 leading-snug">{currentExample.q}</h3>
+                                            <p className="text-gray-500 italic text-sm">{currentExample.qt}</p>
+                                            <p className="text-gray-600 font-medium text-sm mt-2 border-t pt-2 border-orange-100">{currentExample.qm}</p>
+                                            <Volume2 className="w-5 h-5 text-orange-400 absolute bottom-4 right-4" />
+                                        </div>
+                                        <div className="bg-white rounded-2xl p-5 shadow-md border-l-8 border-green-500 relative cursor-pointer hover:bg-green-50 transition-colors" onClick={() => playAudio(currentExample.a)}>
+                                            <div className="absolute top-4 right-4 text-green-200 text-3xl">{currentExample.icon}</div>
+                                            <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase mb-2 inline-block tracking-wider">Answer</span>
+                                            <h3 className="text-xl md:text-2xl font-bold text-gray-800 mt-1 leading-snug">{currentExample.a}</h3>
+                                            <p className="text-gray-500 italic text-sm">{currentExample.at}</p>
+                                            <p className="text-gray-600 font-medium text-sm mt-2 border-t pt-2 border-green-100">{currentExample.am}</p>
+                                            <Volume2 className="w-5 h-5 text-green-500 absolute bottom-4 right-4" />
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<TeluguQuestionModule />);
+    </script>
+</body>
+</html>
